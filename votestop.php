@@ -33,12 +33,12 @@ while($row = mysql_fetch_array($votingResult)) {
     $nameArray[] = $row["name"];
 }
 
-echo $idArray['0'];
-/*
+//echo $idArray['0'];
 
 $voteResult = mysql_query("SELECT * FROM votes WHERE voting_id = " . $idArray['0']);
 
 $voteNum = mysql_num_rows($voteResult);
+//echo $voteNum;
 
 $sql = "UPDATE voting_rounds SET in_progress = 0 WHERE in_progress = 1";
 mysql_query($sql);
@@ -51,7 +51,7 @@ header('Expires: Mon, Jul 26 1997 05:00:00 GMT');
 header('Content-type: application/json');
 //send the result now
 echo json_encode($result_json);
-*/
+
 mysql_close($dbc);
 
 ?>
