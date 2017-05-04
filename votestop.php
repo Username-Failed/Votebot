@@ -33,6 +33,9 @@ while($row = mysql_fetch_array($votingResult)) {
     $nameArray[] = $row["name"];
 }
 
+echo $idArray['0'];
+/*
+
 $voteResult = mysql_query("SELECT * FROM votes WHERE voting_id = " . $idArray['0']);
 
 $voteNum = mysql_num_rows($voteResult);
@@ -48,7 +51,7 @@ header('Expires: Mon, Jul 26 1997 05:00:00 GMT');
 header('Content-type: application/json');
 //send the result now
 echo json_encode($result_json);
-
+*/
 mysql_close($dbc);
 
 ?>
