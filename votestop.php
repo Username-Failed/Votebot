@@ -74,7 +74,7 @@ mysql_query("UPDATE voting_rounds SET average = " . $voteAverage . " WHERE in_pr
 $sql = "UPDATE voting_rounds SET in_progress = 0 WHERE in_progress = 1";
 mysql_query($sql);
 
-$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped<br />Number of votes: ' . $voteNum . '<br />Average: ' . $voteAverage . '<br />Number of ones: ' . $numberOf1 . '<br />Number of twos: ' . $numberOf2 . '<br />Number of threes: ' . $numberOf3 . '<br />Number of fours: ' . $numberOf4 . '<br />Number of fives: ' . $numberOf5, 'notify' => 'false', 'message_format' => 'html');
+$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped<br />Number of votes: ' . $voteNum . '<br />Average: ' . $voteAverage . '<br />Number of 5\'s: ' . $numberOf5 . '<br />Number of 4\'s: ' . $numberOf4 . '<br />Number of 3\'s: ' . $numberOf3 . '<br />Number of 2\'s: ' . $numberOf2 . '<br />Number of 1\'s: ' . $numberOf1, 'notify' => 'false', 'message_format' => 'html');
 //headers for not caching the results
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, Jul 26 1997 05:00:00 GMT');
