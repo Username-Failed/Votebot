@@ -58,7 +58,7 @@ if(mysql_num_rows($votingResult) == 0) {
         //$sql = "INSERT INTO votes (id, voting_id, vote) VALUES (NULL, '" . $votingId .  "', '" . $inputArray['1'] . "');";
         //mysql_query($sql);
     }
-    echo json_encode($result_json);
+    //echo json_encode($result_json);
 }
 
 /*
