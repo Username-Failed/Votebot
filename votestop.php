@@ -51,9 +51,13 @@ foreach($voteArray as $value) {
     $voteTotal = $voteTotal + $value;
 }
 
-$voteAverage = round($voteTotal / $voteNum, 1, PHP_ROUND_HALF_UP);
+$average = $voteTotal / $voteNum;
+
+$voteAverage = round($average, 1, PHP_ROUND_HALF_UP);
 
 //echo $voteNum;
+
+mysql_query("UPDATE voting_rounds SET average = " . $voteAverage . " WHERE in_progress = 1 ORDER BY id DESC LIMIT 1");
 
 $sql = "UPDATE voting_rounds SET in_progress = 0 WHERE in_progress = 1";
 mysql_query($sql);
