@@ -46,9 +46,21 @@ while($row = mysql_fetch_array($voteResult)) {
 }
 
 $voteTotal = 0;
+$numberOf1 = 0;
+$numberOf2 = 0;
+$numberOf3 = 0;
+$numberOf4 = 0;
+$numberOf5 = 0;
 
 foreach($voteArray as $value) {
     $voteTotal = $voteTotal + $value;
+
+    if($value == 1) { $numberOf1++; }
+    if($value == 2) { $numberOf2++; }
+    if($value == 3) { $numberOf3++; }
+    if($value == 4) { $numberOf4++; }
+    if($value == 5) { $numberOf5++; }
+
 }
 
 $average = $voteTotal / $voteNum;
@@ -62,7 +74,7 @@ mysql_query("UPDATE voting_rounds SET average = " . $voteAverage . " WHERE in_pr
 $sql = "UPDATE voting_rounds SET in_progress = 0 WHERE in_progress = 1";
 mysql_query($sql);
 
-$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped<br />Number of votes: ' . $voteNum . '<br />Average: ' . $voteAverage, 'notify' => 'false', 'message_format' => 'html');
+$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped<br />Number of votes: ' . $voteNum . '<br />Average: ' . $voteAverage . '<br />Number of ones: ' . $numberOf1 . '<br />Number of twos: ' . $numberOf2 . '<br />Number of threes: ' . $numberOf3 . '<br />Number of fours: ' . $numberOf4 . '<br />Number of fives: ' . $numberOf5, 'notify' => 'false', 'message_format' => 'html');
 //headers for not caching the results
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, Jul 26 1997 05:00:00 GMT');
