@@ -51,7 +51,7 @@ foreach($voteArray as $value) {
     $voteTotal = $voteTotal + $value;
 }
 
-$voteAverage = $voteTotal / $voteNum;
+$voteAverage = round($voteTotal / $voteNum, 1, PHP_ROUND_HALF_UP);
 
 //echo $voteNum;
 
