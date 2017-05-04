@@ -38,12 +38,27 @@ while($row = mysql_fetch_array($votingResult)) {
 $voteResult = mysql_query("SELECT * FROM votes WHERE voting_id = " . $idArray['0']);
 
 $voteNum = mysql_num_rows($voteResult);
+
+$voteArray = array();
+
+while($row = mysql_fetch_array($voteResult)) {
+    $voteArray[] = $row["vote"];
+}
+
+$voteTotal = 0;
+
+foreach($voteArray as $value) {
+    $voteTotal = $voteTotal + $value;
+}
+
+$voteAverage = $voteTotal / $voteNum;
+
 //echo $voteNum;
 
 $sql = "UPDATE voting_rounds SET in_progress = 0 WHERE in_progress = 1";
 mysql_query($sql);
 
-$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped, Number of votes: ' . $voteNum . ', Average: ', 'notify' => 'false', 'message_format' => 'text');
+$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped<br />Number of votes: ' . $voteNum . '<br />Average: ' . $voteAverage, 'notify' => 'false', 'message_format' => 'html');
 //headers for not caching the results
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, Jul 26 1997 05:00:00 GMT');
