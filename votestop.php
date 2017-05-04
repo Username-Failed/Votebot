@@ -33,12 +33,14 @@ while($row = mysql_fetch_array($votingResult)) {
     $nameArray[] = $row["name"];
 }
 
-$voteResult = mysql_query("SELECT * FROM vote WHERE voting_id = " . $idArray['0']);
+$voteResult = mysql_query("SELECT * FROM votes WHERE voting_id = " . $idArray['0']);
+
+$voteNum = mysql_num_rows($voteResult);
 
 $sql = "UPDATE voting_rounds SET in_progress = 0 WHERE in_progress = 1";
 mysql_query($sql);
 
-$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped, Number of votes: ' . mysql_num_rows($voteResult) . ', Average: ', 'notify' => 'false', 'message_format' => 'text');
+$result_json = array('color' => 'purple', 'message' => 'The voting round called "' . $nameArray['0'] . '" have been stopped, Number of votes: ' . $voteNum . ', Average: ', 'notify' => 'false', 'message_format' => 'text');
 //headers for not caching the results
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, Jul 26 1997 05:00:00 GMT');
