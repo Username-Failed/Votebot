@@ -72,7 +72,7 @@ if(mysql_num_rows($votingResult) == 0) {
     }
 
     if($ok == false) {
-        $result_json = array('color' => 'purple', 'message' => 'Use a number between 1 and 5 to vote', 'notify' => 'false', 'message_format' => 'text');
+        $result_json = array('color' => 'purple', 'message' => 'Use numbers between 1 and 5 to vote', 'notify' => 'false', 'message_format' => 'text');
     }   else {
         $result_json = array('color' => 'purple', 'message' => 'Thanks for your vote, you voted ' . $inputArray['1'] . ' for "' . $nameArray['0'] . '"', 'notify' => 'false', 'message_format' => 'text');
         foreach($votes as $value2) {
@@ -80,7 +80,7 @@ if(mysql_num_rows($votingResult) == 0) {
             mysql_query($sql);
         }
     }
-
+    echo json_encode($result_json);
 }
 /*
 if(!($n == "1" || $n == "2" || $n == "3" || $n == "4" || $n == "5")) {
@@ -90,7 +90,6 @@ if(!($n == "1" || $n == "2" || $n == "3" || $n == "4" || $n == "5")) {
     $sql = "INSERT INTO votes (id, voting_id, vote) VALUES (NULL, '" . $idArray['0'] .  "', '" . $inputArray['1'] . "');";
     mysql_query($sql);
 }
-echo json_encode($result_json);
 */
 
 mysql_close($dbc);
