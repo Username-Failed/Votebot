@@ -1,0 +1,11 @@
+<?php
+    /*
+      Rename to config.php to use this file
+    */
+    define ('DBUSER', 'INSERT USERNAME');
+    define ('DBPW', 'INSERT PASSWORD');
+    define ('DBHOST', 'INSERT HOST_NAME');
+    define ('DBNAME', 'INSERT DATABASE_NAME');
+    
+    $configDone = true;
+?>
