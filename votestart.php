@@ -36,10 +36,16 @@ $input = json_decode($inputJSON, TRUE); //convert JSON into array
 $receivedMessage = $input["item"] ["message"] ["message"];
 $inputArray = explode(' ', $receivedMessage, 2);
 
-$sql = "INSERT INTO voting_rounds (id, name, average, in_progress) VALUES (NULL, '" . $inputArray['1'] . "', NULL, '1');";
+if(empty($inputArray['1'])) {
+    $nameOfRound = "Voting round without specific name";
+} else {
+    $nameOfRound = $inputArray['1'];
+}
+
+$sql = "INSERT INTO voting_rounds (id, name, average, in_progress) VALUES (NULL, '" . $nameOfRound . "', NULL, '1');";
 mysql_query($sql);
 
-$result_json = array('color' => 'purple', 'message' => 'A voting round called "' . $inputArray['1'] . '" has been started, use /vote # to vote', 'notify' => 'false', 'message_format' => 'text');
+$result_json = array('color' => 'purple', 'message' => 'A voting round called "' . $nameOfRound . '" has been started, use /vote # to vote', 'notify' => 'false', 'message_format' => 'text');
 //send the result now
 echo json_encode($result_json);
 
