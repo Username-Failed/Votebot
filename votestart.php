@@ -45,7 +45,7 @@ if(empty($inputArray['1'])) {
 $sql = "INSERT INTO voting_rounds (id, name, average, in_progress) VALUES (NULL, '" . $nameOfRound . "', NULL, '1');";
 mysql_query($sql);
 
-$result_json = array('color' => 'purple', 'message' => 'A voting round called "' . $nameOfRound . '" has been started, use /vote # to vote, where # is 1, 2, 3, 4 or 5. (e.g. /vote 5)<br />Use /votestop to stop the round.', 'notify' => 'false', 'message_format' => 'text');
+$result_json = array('color' => 'purple', 'message' => 'A voting round called "' . $nameOfRound . '" has been started, use /vote # to vote, where # is 1, 2, 3, 4 or 5. (e.g. /vote 5)<br />Use /votestop to stop the round.', 'notify' => 'false', 'message_format' => 'html');
 //send the result now
 echo json_encode($result_json);
 
