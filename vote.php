@@ -60,37 +60,38 @@ if(mysql_num_rows($votingResult) == 0) {
     //send the result now
     echo json_encode($result_json);
 } else {
-    $n = $inputArray['1'];
-    if(!($n == "1" || $n == "2" || $n == "3" || $n == "4" || $n == "5")) {
+    $votes = explode(" ", $inputArray['1']);
+
+    $ok = true;
+
+    foreach($votes as $value) {
+        $n = $value;
+        if(!($n == "1" || $n == "2" || $n == "3" || $n == "4" || $n == "5")) {
+            $ok = false;
+        }
+    }
+
+    if($ok == false) {
         $result_json = array('color' => 'purple', 'message' => 'Use a number between 1 and 5 to vote', 'notify' => 'false', 'message_format' => 'text');
     }   else {
         $result_json = array('color' => 'purple', 'message' => 'Thanks for your vote, you voted ' . $inputArray['1'] . ' for "' . $nameArray['0'] . '"', 'notify' => 'false', 'message_format' => 'text');
-        //$sql = "INSERT INTO votes (id, voting_id, vote) VALUES (NULL, '" . $idArray['0'] .  "', '" . $inputArray['1'] . "');";
-        //mysql_query($sql);
+        foreach($votes as $value2) {
+            $sql = "INSERT INTO votes (id, voting_id, vote) VALUES (NULL, '" . $idArray['0'] .  "', '" . $value2 . "');";
+            mysql_query($sql);
+        }
     }
-    echo json_encode($result_json);
-}
 
+}
 /*
-
-$votingId = [id];
-
-if(1 == 1) {
-    $n = $inputArray['1'];
-    if(!($n == "1" || $n == "2" || $n == "3" || $n == "4" || $n == "5")) {
-        $result_json = array('color' => 'purple', 'message' => 'Use a number between 1 and 5 to vote with', 'notify' => 'false', 'message_format' => 'text');
-    }   else {
-        $result_json = array('color' => 'purple', 'message' => 'Thanks for your vote, you voted ' . $inputArray['1'] . ' for ' . [name], 'notify' => 'false', 'message_format' => 'text');
-        $sql = "INSERT INTO votes (id, voting_id, vote) VALUES (NULL, '" . $votingId .  "', '" . $inputArray['1'] . "');";
-        mysql_query($sql);
-    }
-    //send the result now
-    echo json_encode($result_json);
-} else {
-    $result_json = array('color' => 'purple', 'message' => 'No voting round in progress, use /votestart [name] to start', 'notify' => 'false', 'message_format' => 'text');
-    //send the result now
-    echo json_encode($result_json);
+if(!($n == "1" || $n == "2" || $n == "3" || $n == "4" || $n == "5")) {
+    $result_json = array('color' => 'purple', 'message' => 'Use a number between 1 and 5 to vote', 'notify' => 'false', 'message_format' => 'text');
+}   else {
+    $result_json = array('color' => 'purple', 'message' => 'Thanks for your vote, you voted ' . $inputArray['1'] . ' for "' . $nameArray['0'] . '"', 'notify' => 'false', 'message_format' => 'text');
+    $sql = "INSERT INTO votes (id, voting_id, vote) VALUES (NULL, '" . $idArray['0'] .  "', '" . $inputArray['1'] . "');";
+    mysql_query($sql);
 }
+echo json_encode($result_json);
 */
+
 mysql_close($dbc);
 ?>

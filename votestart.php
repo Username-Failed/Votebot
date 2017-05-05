@@ -23,6 +23,9 @@ if ($dbc = mysql_connect(DBHOST, DBUSER, DBPW)) {
     exit();
 }
 
+$stopSql = "UPDATE voting_rounds SET in_progress = 0 WHERE in_progress = 1";
+mysql_query($stopSql);
+
 //headers for not caching the results
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
